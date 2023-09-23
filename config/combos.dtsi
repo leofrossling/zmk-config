@@ -41,20 +41,21 @@ COMBO(ctrl, &sk LCTL, 21 22)
 COMBO(backspace, &kp BSPC, 27 28)
 COMBO(cmd, &sk LCMD, 30 31)
 COMBO(opt, &sk LALT, 32 33)
-COMBO(q, &kp Q, 1 3)
-//COMBO(z, &kp Z, 21 23)
+COMBO(q, &kp RA(a), 1 3)
+COMBO(z, &kp RA(w), 21 23)
+COMBO(z, &kp RA(o), 26 28)
 COMBO_LONG(capsword, &caps_word, 14 15)
 LAYER_COMBO(lock, &tog LCK, 20 29 30 33, NORMAL_LAYERS LOCK_LAYER)
 
-combo_swe_one {
-  compatible = "zmk,behavior-macro";
-  key_positions = 21 23;
-  label = "swe one";
-  #binding-cells = <0>;
-  wait-ms = <U_WAIT_MS>;
-  tap-ms = <U_TAP_MS>;
-  bindings
-    = <&macro_press   &kp LALT>
-    , <&macro_tap     &kp KP_N0 &kp KP_N2 &kp KP_N2 &kp KP_N9>
-    , <&macro_release &kp LALT>;
-};
+// combo_swe_one {
+//   compatible = "zmk,behavior-macro";
+//   key_positions = 21 23;
+//   label = "swe one";
+//   #binding-cells = <0>;
+//   wait-ms = <U_WAIT_MS>;
+//   tap-ms = <U_TAP_MS>;
+//   bindings
+//     = <&macro_press   &kp LALT>
+//     , <&macro_tap     &kp KP_N0 &kp KP_N2 &kp KP_N2 &kp KP_N9>
+//     , <&macro_release &kp LALT>;
+// };
