@@ -34,7 +34,25 @@
                 , <&macro_tap &kp A>
                 , <&macro_release &kp RALT>
                 ;
-        }:
+        };
+        swe2: swe2 {
+            label = "Swe2";
+            compatible = "zmk,behavior-macro";
+            bindings
+                = <&macro_press &kp RALT>
+                , <&macro_tap &kp W>
+                , <&macro_release &kp RALT>
+                ;
+        };
+        swe3: swe3 {
+            label = "Swe3";
+            compatible = "zmk,behavior-macro";
+            bindings
+                = <&macro_press &kp RALT>
+                , <&macro_tap &kp O>
+                , <&macro_release &kp RALT>
+                ;
+        };
     };
 
     combos {
