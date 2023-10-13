@@ -25,6 +25,18 @@
 
 / {
 
+    macros {
+        swe1: swe1 {
+            label = "Swe1";
+            compatible = "zmk,behavior-macro";
+            bindings
+                = <&macro_press &kp RALT>
+                , <&macro_tap &kp a>
+                , <&macro_release &kp LSHFTRALT>
+                ;
+        }:
+    };
+
     combos {
         #include "combos.dtsi"    
     };
