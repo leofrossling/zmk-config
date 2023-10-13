@@ -35,15 +35,30 @@ compatible = "zmk,combos";
 ╰────────╮30 31│ │32 33╭────────╯
          ╰─────╯ ╰─────╯         */
 
+combo_swe1 {
+  key-positions = <21 23>;
+  bindings = <&kp RA(o)>;
+}
+
+combo_swe2 {
+  key-positions = <1 3>;
+  bindings = <&kp RA(a)>;
+}
+
+combo_swe3 {
+  key-positions = <26 28>;
+  bindings = <&kp j>;
+}
+
 COMBO(tab, &kp TAB, 1 2)
 COMBO(shift, &skq LSHFT, 7 8)
 COMBO(ctrl, &sk LCTL, 21 22)
 COMBO(backspace, &kp BSPC, 27 28)
 COMBO(cmd, &sk LCMD, 30 31)
 COMBO(opt, &sk LALT, 32 33)
-COMBO(q, &kp RA(a), 1 3)
-COMBO(z, &kp RA(w), 21 23)
-COMBO(z, &kp RA(o), 26 28)
+//COMBO(q, &kp RA(a), 1 3)
+//COMBO(z, &kp RA(w), 21 23)
+//COMBO(z, &kp RA(o), 26 28)
 COMBO_LONG(capsword, &caps_word, 14 15)
 LAYER_COMBO(lock, &tog LCK, 20 29 30 33, NORMAL_LAYERS LOCK_LAYER)
 
