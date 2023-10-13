@@ -31,8 +31,8 @@
             compatible = "zmk,behavior-macro";
             bindings
                 = <&macro_press &kp RALT>
-                , <&macro_tap &kp a>
-                , <&macro_release &kp LSHFTRALT>
+                , <&macro_tap &kp A>
+                , <&macro_release &kp RALT>
                 ;
         }:
     };
