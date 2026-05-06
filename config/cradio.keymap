@@ -25,39 +25,6 @@
 
 / {
 
-    macros {
-        swe1: swe1 {
-            label = "Swe1";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_press &kp RALT>
-                , <&macro_tap &kp A>
-                , <&macro_release &kp RALT>
-                ;
-        };
-        swe2: swe2 {
-            label = "Swe2";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_press &kp RALT>
-                , <&macro_tap &kp W>
-                , <&macro_release &kp RALT>
-                ;
-        };
-        swe3: swe3 {
-            label = "Swe3";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_press &kp RALT>
-                , <&macro_tap &kp O>
-                , <&macro_release &kp RALT>
-                ;
-        };
-    };
-
     combos {
         #include "combos.dtsi"    
     };
@@ -70,6 +37,21 @@
             bindings = <&kp>;
             release-after-ms = <1000>;
             quick-release;
+        };
+        fun_tmux: fun_tmux {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&tmux_prefix>;
+        };
+    };
+
+    macros {
+        tmux_prefix: tmux_prefix {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL>, <&macro_tap &kp A>, <&macro_release &kp LCTRL>;
         };
     };
 };
@@ -88,14 +70,14 @@
                 compatible = "zmk,keymap";
                 colemak_layer {
 // -----------------------------------------------------------------
-// |  Q  |  W  |  F  |  P  |  B  | |  J  |  L  |  U  |  Y  |     |
+// |  Q  |  W  |  F  |  P  |  B  | |  J  |  L  |  U  |  Y  | ALT |
 // |  A  |  R  |  S  |  T  |  G  | |  M  |  N  |  E  |  I  |  O  |
 // |  Z  |  X  |  C  |  D  |  V  | |  K  |  H  |  ,  |  .  |-FUN-|
 //                   |-SYM-| SPC | | RET |-NUM-|
                         bindings = <
-   &kp Q &kp W &kp F &kp P &kp B &kp J &kp L   &kp U     &kp Y   &none
+   &kp Q &kp W &kp F &kp P &kp B &kp J &kp L   &kp U     &kp Y   &sk LALT
    &kp A &kp R &kp S &kp T &kp G &kp M &kp N   &kp E     &kp I   &kp O
-   &kp Z &kp X &kp C &kp D &kp V &kp K &kp H   &kp COMMA &kp DOT &mo FUN
+   &kp Z &kp X &kp C &kp D &kp V &kp K &kp H   &kp COMMA &kp DOT &fun_tmux FUN 0
                    &mo SYM &kp SPACE &kp RET &mo NUM
                         >;
                 };
@@ -108,7 +90,7 @@
                         bindings = <
    &none  &kp BSLH &kp PRCNT &kp DLLR  &none &none &kp CARET &kp LBRC &kp RBRC &none
    &kp STAR &kp LPAR &kp RPAR  &kp COLON &none &none &kp DQT   &kp LBKT &kp RBKT &kp SEMI
-   &mo FUN  &kp GRAVE   &kp AT  &kp AMPS  &none &none &kp HASH &kp LT   &kp GT   &kp DEL
+   &mo FUN  &kp GRAVE   &kp AT  &kp AMPS  &none &none &kp HASH &kp LT   &kp GT   &fun_tmux FUN 0
                              &trans &kp SPACE &kp RET &kp ESC
                         >;
                 };
@@ -140,12 +122,12 @@
                 };
                 fun_layer {
 // -----------------------------------------------------------------
-// |     | F 6 | F 5 | F 4 | F10 | | <!> | <!> | <!> | <!> |     |
+// | F24 | F 6 | F 5 | F 4 | F10 | | <!> | <!> | <!> | <!> |     |
 // |CAPSL| F 3 | F 2 | F 1 | F11 | | BT2 |VMUTE|VOLDN|VOLUP| <!> |
 // |-!!!-| F 9 | F 8 | F 7 | F12 | | BT0 | BT1 |BRIDN|BRIUP|_FUN_|
 //                   |     | SPC | | RET |     |
                         bindings = <
-   &none &kp F6 &kp F5 &kp F4 &kp F10 &none &none &none &none &none
+   &kp F24 &kp F6 &kp F5 &kp F4 &kp F10 &none &none &none &none &none
    &kp CAPS &kp F3   &kp F2 &kp F1 &kp F11 &bt BT_SEL 2 &kp K_MUTE &kp C_VOL_DN &kp C_VOL_UP &none
    &mo DAN &kp F9 &kp F8 &kp F7  &kp F12 &bt BT_SEL 0  &bt BT_SEL 1 &kp C_BRI_DN &kp C_BRI_UP &trans
                          &none &trans &trans &none 
@@ -160,7 +142,7 @@
                     // impactful buttons
                     // Bluetooth clear, reset, chaning BLE/USB preference, bootloader
                     bindings = <
-&none &none &none &none &none &bt BT_CLR  &out OUT_BLE &out OUT_USB &none &none
+&none &none &none &none &none &bt BT_CLR  &out OUT_BLE &out OUT_USB &reset &none
 &none &none &none &none &none &none &none &none &none &bootloader
 &trans &none &none &none &none &none &none &none &none &trans
 &none &none &none &none
